@@ -1,0 +1,90 @@
+<style>
+    .error {
+        color: red;
+        background-color: yellow;
+        font-weight: bold;
+        text-decoration: line-through;
+    }
+</style>
+<div style="align-content: center; align-items: center;">
+    <h1>Reregistration</h1>
+    <div>
+        <form (ngSubmit)="onSubmit()" [formGroup]="myFrom">
+
+            <table>
+                <tr>
+
+                    <td>Name:</td>
+                    <td>
+                        <input type="text" name="name" id="name" formControlName="username">
+                    </td>
+                    <td>
+                        <div class="error form-text text-muted">
+                            <div *ngIf="username?.hasError('required')&&(username?.dirty)||(username?.touched)">
+                                <div *ngIf="username?.hasError('required')">User Name Must Be Entered</div>
+                            </div>
+                            <div *ngIf="username?.hasError('pattern')">Number is not valid</div>
+                            <div *ngIf="username?.hasError('minlength')">Name must be 4 character</div>
+                            <div *ngIf="username?.hasError('maxlength')">Name maximum 15 character</div>
+                        </div>
+                    </td>
+
+                </tr>
+
+                <tr>
+
+                    <td>Email:</td>
+
+                    <td>
+                        <input class="form-control" type="email" formControlName="email">
+                    </td>
+                    <td>
+                        <div class="error">
+                            <div *ngIf="email?.hasError('required')&&(email?.dirty)||(email?.touched)">
+                                <div *ngIf="email?.hasError('required')">email Must Be Entered</div>
+                            </div>
+                            <div *ngIf="email?.hasError('pattern')">Invalid Email</div>
+                        </div>
+                    </td>
+
+                </tr>
+                <tr>
+
+                    <td>Password:</td>
+                    <td>
+                        <input class="form-control" type="password" name="pass" id="pass" formControlName="password"
+                            [(ngModel)]="user.password">
+                    </td>
+                    <td>
+                        <div class="error">
+                            <div *ngIf="pass?.hasError('required') && (pass?.dirty)||(pass?.touched)">
+                                <div *ngIf="pass?.hasError('required')">Password Can't be Empty</div>
+                            </div>
+                            <div *ngIf="pass?.hasError('minlength')">Password Must Be 5 character</div>
+                            <div *ngIf="pass?.hasError('maxlength')">Password Upto 15 character</div>
+                            <div *ngIf="pass?.hasError('pattern')">Password must have at list One
+                                <ol>
+                                    <li>
+                                        Upper character
+                                    </li>
+                                    <li>
+                                        Lower character
+                                    </li>
+                                    <li>
+                                        Number character and
+                                    </li>
+                                    <li>
+                                        Special character
+                                    </li>
+                                </ol>
+
+                            </div>
+                        </div>
+                    </td>
+
+                </tr>
+            </table>
+        </form>
+    </div>
+</div>
+<div>{{myFrom.value|json}}</div>

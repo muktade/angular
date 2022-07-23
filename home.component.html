@@ -1,0 +1,66 @@
+<p>home works!</p>
+<a [routerLink]="['/a']">About</a>
+<ul>
+    <li><a [routerLink]="['/ca']">Child One</a></li>
+    <li><a [routerLink]="['/cb']">Child Two</a></li>
+</ul>
+
+
+<router-outlet></router-outlet>
+
+<div>
+    <h1>Reactive Form</h1>
+    <label for="colovr">Color:
+        <input type="text" [formControl]='color'></label>
+</div>
+<div>
+    <p>{{color.value}}</p>
+</div>
+
+<div>
+    <h1>Reactive Form by ng</h1>
+    <label for="coasdfasdlovr">Color:
+        <input type="text" [(ngModel)]='name'></label>
+</div>
+<div>
+    <p>{{name}}</p>
+</div>
+
+<div>
+    <h1>Ligin Page</h1>
+    <form [formGroup]="myForm" (ngSubmit)="onSubmit()">
+        <label for="colovr">Name:
+            <input type="text" formControlName="username" /></label><br>
+        <div *ngIf="username ?.invalid && (username?.dirty )|| (username?.touched)">
+            <div *ngIf="username?.hasError('required')">username is required</div>
+        </div>
+        <div *ngIf="username?.hasError('minlength')">User name must be 5 charekter</div>
+        <div *ngIf="username?.hasError('maxlength')">user name maxlength 15</div>
+        <label for="colovr">Password:
+            <input type="password" formControlName="password" /></label>
+        <label for="email">Enter Email:</label>
+        <input type="email" formControlName="email">
+<div *ngIf="email?.invalid && (email?.dirty)||(email?.touched)">
+    <div *ngIf="email?.hasError('required')">email must be inter</div>
+</div>
+<div *ngIf="email?.hasError('pattern')">invalid Email</div>
+        <input type="submit" value="Submit" />
+    </form>
+</div>
+
+<div>
+    <p>{{myForm.value|json}}</p>
+</div>
+<div>
+    <h1>in persion</h1>
+    <label for="firstname">First Name:</label>
+    <input type="text" name="firstname" required minlength="5" maxlength="15" [(ngModel)]="persion.firstName"
+        #firstname="ngModel">
+    <div *ngIf="firstname?.invalid && (firstname?.dirty)||firstname?.touched">
+        <div *ngIf="firstname?.errors?.['required']">First Name is required</div>
+
+        <div *ngIf="firstname?.errors?.['minlength']">First Name is minlenght 5 character</div>
+        <div *ngIf="firstname?.errors?.['maxlength']">First Name is Maxumum 15 character</div>
+    </div>
+
+</div>
